@@ -1,0 +1,448 @@
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Hey Ishika 💜</title>
+
+<link rel="stylesheet" href="Ishika.css">
+
+</head>
+
+<body>
+  
+
+<div class="container" id="container">
+
+    <p class="top-text">
+        A LITTLE SURPRISE FOR YOU
+    </p>
+
+    <h1 class="hero-title">
+        Hey
+        <span>Ishika</span>
+        <small>✦</small>
+    </h1>
+
+    <p class="subtitle">
+        Something special is waiting for you.
+        <br>
+        Take a little moment just for yourself. 💜
+    </p>
+
+    <p class="label">ENTER PASSCODE</p>
+
+    <div class="dots">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+    </div>
+
+    <div class="keypad">
+
+        <button onclick="press(1)">1</button>
+        <button onclick="press(2)">2</button>
+        <button onclick="press(3)">3</button>
+
+        <button onclick="press(4)">4</button>
+        <button onclick="press(5)">5</button>
+        <button onclick="press(6)">6</button>
+
+        <button onclick="press(7)">7</button>
+        <button onclick="press(8)">8</button>
+        <button onclick="press(9)">9</button>
+
+        <span></span>
+
+        <button onclick="press(0)">0</button>
+
+        <button onclick="erase()">⌫</button>
+
+    </div>
+
+    <p id="message"></p>
+    <audio id="bgMusic" loop>
+    <source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<button id="musicBtn" onclick="toggleMusic()">
+    🎵 Play Music
+</button>
+
+</div>
+  <audio id="bgMusic" loop>
+    <source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<button id="musicBtn" onclick="toggleMusic()">♫</button>
+
+<script>
+
+let password = "2007";
+let entered = "";
+
+function updateDots() {
+
+    document.querySelectorAll(".dot").forEach((dot, i) => {
+
+        dot.classList.toggle("active", i < entered.length);
+
+    });
+
+}
+
+function press(num) {
+
+    if (entered.length >= 4) return;
+
+    entered += num;
+
+    updateDots();
+
+    if (entered.length === 4) {
+
+        if (entered === password) {
+
+            unlockWebsite();
+
+        } else {
+
+            document.getElementById("message").innerText =
+                "Oops! Try again 💜";
+
+            document.getElementById("container")
+                .classList.add("wrong");
+
+            setTimeout(() => {
+
+                entered = "";
+
+                updateDots();
+
+                document.getElementById("message").innerText = "";
+
+                document.getElementById("container")
+                    .classList.remove("wrong");
+
+            }, 800);
+
+        }
+
+    }
+
+}
+
+function erase() {
+
+    entered = entered.slice(0, -1);
+
+    updateDots();
+
+    document.getElementById("message").innerText = "";
+
+}
+
+function unlockWebsite() {
+     const music = document.getElementById("bgMusic");
+const btn = document.getElementById("musicBtn");
+
+
+
+music.play().then(() => {
+    btn.innerText = "Ⅱ";
+}).catch(() => {
+    btn.innerText = "♫";
+});
+
+    const container = document.getElementById("container");
+
+    document.getElementById("message").innerText =
+        "✨ Unlocking your surprise...";
+
+    container.classList.add("exit");
+
+    setTimeout(() => {
+
+        container.innerHTML = `
+
+            <div class="birthday-screen">
+
+                <div class="glow">✦</div>
+
+                <p class="welcome-text">
+                    A SPECIAL MOMENT FOR
+                </p>
+
+                <h1 class="birthday-title">
+                    Ishika 💜
+                </h1>
+
+                <div class="line"></div>
+
+                <p class="final-text">
+                    Your little surprise begins now...
+                </p>
+
+                <button class="surprise-btn"
+                    onclick="showBirthdayMessage()">
+                    Open Your Surprise 💌
+                </button>
+
+                <div class="heart">♡</div>
+
+            </div>
+
+        `;
+
+        container.classList.remove("exit");
+        container.classList.add("enter");
+
+    }, 900);
+
+}
+
+function showBirthdayMessage() {
+
+    const container = document.getElementById("container");
+
+    container.classList.remove("enter");
+    container.classList.add("exit");
+
+    setTimeout(() => {
+
+        container.innerHTML = `
+
+            <div class="birthday-screen">
+
+                <div class="glow">✦</div>
+
+                <p class="welcome-text">
+                    TODAY IS ALL ABOUT YOU
+                </p>
+
+                <h1 class="birthday-title">
+                    Happy Birthday
+                    <br>
+                    Moonlight..... 🎂
+                </h1>
+
+                <div class="line"></div>
+
+                <p class="final-text">
+                    May your life always be filled
+                    with happiness, beautiful memories
+                    and endless smiles.
+
+                    <br><br>
+
+                    Keep shining and stay amazing! ✨
+
+                    <br><br>
+
+                    You deserve all the happiness
+                    in the world. 💜
+                </p>
+
+                <div class="heart">♡</div>
+
+                <p class="bottom-text">
+                    
+                </p>
+
+                <div class="scroll-hint">
+
+                    <p>There's More Waiting For You...</p>
+
+                    <span>SCROLL DOWN</span>
+
+                    <div class="arrow">↓</div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PHOTO GALLERY -->
+
+            <section class="gallery">
+
+                <h2 class="gallery-title">
+                    Beautiful Memories ✨
+                </h2>
+
+                <p class="gallery-subtitle">
+                    Every picture tells a little story 💜
+                </p>
+
+
+                <div class="photo-card left reveal">
+
+                    <img src="photo1.png" alt="Memory 1">
+
+                    <p>
+                        Just like this beautiful weather
+                        you look so fresh and serene 🌧️
+                    </p>
+
+                </div>
+
+
+                <div class="photo-card right reveal">
+
+                    <img src="photo2.jpg" alt="Memory 2">
+
+                    <p>
+                        That smile deserves its own
+                        little spotlight. 💙
+                    </p>
+
+                </div>
+
+
+                <div class="photo-card left reveal">
+
+                    <img src="photo3.jpg" alt="Memory 3">
+
+                    <p>
+                        A little sunshine in every picture. 🌊
+                    </p>
+
+                </div>
+
+
+                <div class="photo-card right reveal">
+
+                    <img src="photo4.jpg" alt="Memory 4">
+
+                    <p>
+                        Simplicity has its own kind of magic. ✨
+                    </p>
+
+                </div>
+
+
+                <div class="photo-card left reveal">
+
+                    <img src="photo5.jpg" alt="Memory 5">
+
+                    <p>
+                        Elegance is not just a style,
+                        it's an aura. 💜
+                    </p>
+
+                </div>
+
+
+                <div class="photo-card right reveal">
+
+                    <img src="photo6.jpg" alt="Memory 6">
+
+                    <p>
+                        Keep being effortlessly beautiful. 🖤
+                    </p>
+
+                </div>
+
+
+                <!-- FINAL MESSAGE -->
+
+                <div class="gallery-end">
+
+                    <div class="glow">♡</div>
+
+                    <h2>Stay Beautiful, Ishika!</h2>
+
+                    <p>
+                        Never stop smiling.
+
+                        <br><br>
+
+                        Keep shining, keep laughing
+                        and always be happy. 💜
+
+                        <br><br>
+
+                        You deserve all the happiness
+                        in this world.
+                    </p>
+
+                    <span>
+                      
+                    </span>
+
+                </div>
+
+            </section>
+
+        `;
+
+
+        container.classList.remove("exit");
+        container.classList.add("enter");
+
+
+        // ONE BY ONE SCROLL ANIMATION
+
+        const observer = new IntersectionObserver(
+
+            (entries) => {
+
+                entries.forEach(entry => {
+
+                    if (entry.isIntersecting) {
+
+                        entry.target.classList.add("show");
+
+                        observer.unobserve(entry.target);
+
+                    }
+
+                });
+
+            },
+
+            {
+                threshold: 0.20
+            }
+
+        );
+
+
+        document.querySelectorAll(".reveal").forEach(photo => {
+
+            observer.observe(photo);
+
+        });
+
+    }, 700);
+
+}
+  function toggleMusic() {
+
+    const music = document.getElementById("bgMusic");
+    const btn = document.getElementById("musicBtn");
+
+    if (music.paused) {
+
+        music.play().then(() => {
+            btn.innerText = "Ⅱ";
+        }).catch(() => {
+            btn.innerText = "♫";
+        });
+
+    } else {
+
+        music.pause();
+        btn.innerText = "♫";
+
+    }
+
+  }
+  
+  
+
+</script>
+
+</body>
+</html>       
